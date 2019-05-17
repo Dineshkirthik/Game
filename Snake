@@ -1,0 +1,109 @@
+//Snake game
+
+l=[]
+d={25:8,28:17,11:21,16:29}
+
+def reset():
+  for i in range(36):
+    l.append("*")
+  l[8]='s'
+  l[17]='s'
+  l[25]='S'
+  l[28]='S'
+  l[11]='lh'
+  l[16]='lh'
+  l[21]='LH'
+  l[29]='LH'
+ 
+
+ 
+def display():
+  cnt=35
+  mov=1
+  while(mov<7):
+      if mov%2==1:
+        for i in range(6):
+          print(l[cnt],end=' ')
+          #print(cnt,end=' ')
+          cnt-=1
+        print()
+      else:
+        cnt=cnt-5
+        for i in range(6):
+          print(l[cnt],end=' ')
+          #print(cnt,end=' ')
+          cnt+=1
+        print()
+        cnt=cnt-7
+      mov+=1
+  
+  
+def move_dice():
+  temp=int(input("Enter the dice value"))
+  while(temp<1 or temp>6):
+    temp=int(input("Re-Enter the dice value"))
+  return temp
+
+
+reset()
+p1='$'
+pos=0
+l[pos]=p1
+display()
+flag=1
+while(flag==1):
+  
+  cp=pos
+  pos=pos+move_dice()
+  
+  
+  if pos==35:
+    print("\nPalyer Wins")
+    flag=0
+  
+  if pos>29:
+      if pos>35:
+        print("Re enter the dice value to reach the End")
+        pos=cp
+      
+  
+  
+  if (l[cp]=='s$'):
+    l[cp]='s'
+  
+  if (l[cp]=='LH$'):
+    l[cp]='LH'
+  
+  elif(cp=='S' or cp=='lh'):
+    pass
+  
+  else:
+    l[cp]='*'
+  
+    
+  if(l[pos]=='s'):
+    l[pos]='s'+p1
+    
+  if(l[pos]=='LH'):
+    l[pos]='LH'+p1
+  
+  elif (l[pos]=="*"):
+    l[pos]=p1
+  
+  elif(pos==28 or pos==25):
+    pos=d[pos]
+    l[pos]='s'+p1
+  
+  elif(pos==11 or pos==16):
+    pos=d[pos]
+    l[pos]='LH'+p1
+  
+  display()
+  
+  
+  
+    
+      
+    
+
+      
